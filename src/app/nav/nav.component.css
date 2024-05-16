@@ -1,0 +1,7 @@
+*{
+        font-weight: 500;
+        font-style: normal;
+}
+.dropdown-toggle, .dropdown-item {
+        cursor: pointer;
+}
