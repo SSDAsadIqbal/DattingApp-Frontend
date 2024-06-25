@@ -12,8 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private http:HttpClient){}
 
 
-  ngOnInit(): void {
-    this.getUsers();
+  ngOnInit(): void { 
   }
 
 
@@ -23,13 +22,6 @@ export class HomeComponent implements OnInit {
   }
 
   
-  getUsers() {
-    this.http.get('http://192.168.1.115:5000/api/v1/Users/GetUsers').subscribe({
-      next: response => this.users = response,
-      error: error => console.log(error),
-      complete: () => { console.log('Request has completed') },
-    })
-  }
 
   cancelRegisterMode(event: boolean) {
     this.registerMode = event;
