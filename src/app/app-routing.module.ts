@@ -12,13 +12,13 @@ import { ServerErrorComponent } from './error/server-error/server-error.componen
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
-  {path:'',
+  {path:'members',
     runGuardsAndResolvers: 'always',
     canActivate:[authGuard],
     children:[
-          {path:'members',component:MemberListComponent},
-          {path:'members/:id',component:MemberDetailsComponent},
-          {path:'lists',component:ListsComponent},
+          {path:'',component:MemberListComponent},
+          {path:':userName',component:MemberDetailsComponent},
+          {path:'',component:ListsComponent},
           {path:'messages',component:MessagesComponent},]
   }, 
   {path:'errors',component:TestErrorComponent},
