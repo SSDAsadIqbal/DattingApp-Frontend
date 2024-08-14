@@ -18,7 +18,8 @@ import { ServerErrorComponent } from './error/server-error/server-error.componen
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './_interceptor/jwt.interceptor';
-import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TabsModule } from 'ngx-bootstrap/tabs'; 
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     TestErrorComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    MemberCardComponent,
+    MemberCardComponent, 
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +43,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     BrowserAnimationsModule,
     FormsModule,
     SharedModule,
+    TabsModule.forRoot()
     
   ],
   providers: [

@@ -12,11 +12,11 @@ export class MembersService {
   baseUrl = environment.apiUrl;
 
   getMembers(){
-    return this.http.get<Member[]>(this.baseUrl + 'Users/GetUsers' , this.getHttpOptions())
+    return this.http.get<Member[]>(this.baseUrl + 'Users/GetUsers' )
   }
 
   getMember(userName:string){
-    return this.http.get<Member>(this.baseUrl + 'Users/GetUser/' + userName , this.getHttpOptions())
+    return this.http.get<Member>(this.baseUrl + 'Users/GetUser/' + userName )
   }
 
   getHttpOptions(){
@@ -29,5 +29,9 @@ export class MembersService {
         Authorization : 'Bearer ' + user.token
       })
     }
+  }
+
+  updateMember(member : Member){
+    return this.http.put(this.baseUrl + 'Users/UpdateUser' , member);
   }
 }

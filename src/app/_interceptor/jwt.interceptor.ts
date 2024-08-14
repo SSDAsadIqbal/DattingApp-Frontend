@@ -13,16 +13,18 @@ export class JwtInterceptor implements HttpInterceptor {
 
   constructor(private accountService:AccountService) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> { 
     if(this.accountService.currentUser$){
     const userString= localStorage.getItem('user'); 
     const user = JSON.parse(userString!)
-      request.clone({
-        setHeaders:{
-          Authorization : 'Bearer ' + user.token
+    if (user && user.token) {
+      // Clone the request to add the Authorization header with the JWT token
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${user.token}`
         }
-      })
+      });
+    }
     }
     return next.handle(request);
   }
