@@ -11,11 +11,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/datting-app",
+            "outputPath": {
+              "base": "dist/datting-app"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -29,10 +30,12 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/bootswatch/dist/cerulean/bootstrap.css",
               "./node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/ngx-spinner/animations/ball-triangle-path.css" ,
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -51,9 +54,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,

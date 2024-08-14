@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,36 +20,42 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { JwtInterceptor } from './_interceptor/jwt.interceptor';
 import { TabsModule } from 'ngx-bootstrap/tabs'; 
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { NgxSpinnerComponent, NgxSpinnerModule } from 'ngx-spinner';
+import { loadingInterceptor } from './_interceptor/loading.interceptor';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    HomeComponent,
-    MemberListComponent ,
-    RegisterComponent,
-    ListsComponent,
-    MessagesComponent,
-    TestErrorComponent,
-    NotFoundComponent,
-    ServerErrorComponent,
-    MemberCardComponent, 
-    MemberEditComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    SharedModule,
-    TabsModule.forRoot()
-    
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent]
+@NgModule({ declarations: [
+        AppComponent,
+        NavComponent,
+        HomeComponent,
+        MemberListComponent,
+        RegisterComponent,
+        ListsComponent,
+        MessagesComponent,
+        TestErrorComponent,
+        NotFoundComponent,
+        ServerErrorComponent,
+        MemberCardComponent,
+        MemberEditComponent
+    ],
+    bootstrap: [AppComponent], 
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        SharedModule,
+        NgxSpinnerModule,
+        NgxSpinnerComponent,
+        TabsModule.forRoot()
+    ],
+    providers: [
+        // Provide HTTP interceptors using the new Angular 18 API
+        provideHttpClient(
+          withInterceptors([loadingInterceptor]),
+          withInterceptorsFromDi()
+        ),
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    ]
 })
 export class AppModule { }
