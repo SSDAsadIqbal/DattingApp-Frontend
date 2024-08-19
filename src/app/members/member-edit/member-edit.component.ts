@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
 import { Member } from 'src/app/_models/member';
@@ -20,25 +20,24 @@ export class MemberEditComponent implements OnInit {
   }
 
   member?: Member;
-
+  profilePhoto = this.member?.photos.find(photo => photo.isMain)?.data
   constructor(
-    private memberservice: MembersService,
-    private accountService: AccountService,
+    private memberservice: MembersService, 
     private toaster: ToastrService,
     private cdr: ChangeDetectorRef
   ) {}
-
+   accountService = inject(AccountService)
   ngOnInit(): void {
     this.loadMember();
   }
 
-  loadMember() {
-    this.accountService.currentUser$.subscribe(async (user) => {
+  async loadMember() {
+    let user = this.accountService.currentUser();
       if (user) {
         this.member = await lastValueFrom(this.memberservice.getMember(user.username));
         this.cdr.detectChanges(); // Trigger change detection to prevent the ExpressionChangedAfterItHasBeenCheckedError
       }
-    });
+   
   }
 
   updateMember() {
@@ -48,5 +47,9 @@ export class MemberEditComponent implements OnInit {
         this.editForm?.reset(this.member);
       },
     });
+  }
+
+  onMemberChange(event:Member){
+    this.member = event;
   }
 }

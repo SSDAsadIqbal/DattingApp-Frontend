@@ -15,8 +15,7 @@ export class NavComponent implements OnInit {
  model:any = {
   UserName:'',
   password:'',
-  };
-  currentUser$ : Observable<User | null> = of(null);
+  }; 
 
   constructor(
     public accountService:AccountService,
@@ -31,8 +30,8 @@ export class NavComponent implements OnInit {
 
  login(){
   this.accountService.login(this.model).subscribe({
-    next:res=>{
-      this.router.navigateByUrl('/members');
+    next:res=>{ 
+      this.router.navigateByUrl('/members');  
     }, 
   })
  }

@@ -4,7 +4,7 @@
           
           
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <ng-container *ngIf="(accountService.currentUser$ | async)">
+              <ng-container *ngIf="(accountService.currentUser())">
               <li class="nav-item">
                 <a class="nav-link" routerLink="members" routerLinkActive="active">Matches</a>
               </li>
@@ -20,15 +20,16 @@
               </li>
             </ul>
          
-            <div class="dropdown" *ngIf="(accountService.currentUser$| async) as user" dropdown>
-              <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle >Welcome {{user.username | titlecase}}</a>
+            <div class="dropdown" *ngIf="accountService.currentUser()?.username" dropdown>
+              <img class="me-2" [src]="accountService.currentUser()!.userPhotoUrl" alt="">
+              <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle >Welcome <strong>{{this.accountService.currentUser()!.username | titlecase}}</strong></a>
               <div class="dropdown-menu" *dropdownMenu>
                 <a routerLink="/member/edit" class="dropdown-item">Edit Profile</a>
                 <a class="dropdown-item" (click)="logout()">logout</a>
               </div>
             </div>
 
-            <form *ngIf="!(accountService.currentUser$ | async)" class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
+            <form *ngIf="!accountService.currentUser()" class="d-flex" #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
               <input 
                     name="userName"
                     [(ngModel)]="model.UserName"
@@ -46,3 +47,4 @@
             </form>
         </div>
 </nav>
+ 

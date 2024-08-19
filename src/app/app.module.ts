@@ -22,6 +22,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { NgxSpinnerComponent, NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './_interceptor/loading.interceptor';
+import { PhotoEditorComponent } from "./members/photo-editor/photo-editor.component";
 
 @NgModule({ declarations: [
         AppComponent,
@@ -39,15 +40,16 @@ import { loadingInterceptor } from './_interceptor/loading.interceptor';
     ],
     bootstrap: [AppComponent], 
     imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        SharedModule,
-        NgxSpinnerModule,
-        NgxSpinnerComponent,
-        TabsModule.forRoot()
-    ],
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    SharedModule,
+    NgxSpinnerModule,
+    NgxSpinnerComponent,
+    TabsModule.forRoot(),
+    PhotoEditorComponent
+],
     providers: [
         // Provide HTTP interceptors using the new Angular 18 API
         provideHttpClient(

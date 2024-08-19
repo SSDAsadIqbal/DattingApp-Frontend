@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { Member } from 'src/app/_models/member';
+import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
 
 
@@ -17,8 +18,10 @@ import { MembersService } from 'src/app/_services/members.service';
 export class MemberDetailsComponent implements OnInit {
 
   constructor(private memberService:MembersService,private route:ActivatedRoute) { }
+  accountService = inject(AccountService);
   public member :Member | undefined;
   images:GalleryItem[]= [];
+ 
   ngOnInit() { 
     this.loadMember();
   }
@@ -37,8 +40,7 @@ export class MemberDetailsComponent implements OnInit {
     })
   }
 
-  photo(){
-    return this.member?.photos.find(p=>p.isMain === true)?.data
-  
+  mainPhoto(){
+    return this.member!.photos.find(p=>p.isMain)?.data
   }
 }

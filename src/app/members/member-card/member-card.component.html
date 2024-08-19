@@ -3,7 +3,13 @@
     <div *ngFor="let member of members" class="col-md-2 d-flex align-items-stretch" style="padding: 5px;">
       <div class="card mb-5 cardClass d-flex flex-column" style="min-height: 50px;">
         <div class="card-img-wrapper">
-          <img style="height: 200px; width: 320px; object-fit: cover;" src="{{member.photos[0].data || './assets/user.png'}}" alt="" class="card-img-top">
+          <img
+          style="height: 100%; width: 100%; object-fit: cover; object-position: center;"
+          [src]="mainPhoto(member)"
+          alt=""
+          class="card-img-top"
+        />
+        
 
           <ul class="list-inline member-icons animate text-center">
             <li class="list-inline-item">

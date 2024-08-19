@@ -13,6 +13,6 @@ export interface Member {
     interests: string
     city: string
     country: string
-    photos: Photo[]
+    photos: Photo[], 
   }
   

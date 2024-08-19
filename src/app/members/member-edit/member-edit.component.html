@@ -15,6 +15,17 @@
     <div class="card">
       <div class="card-body">
         <div>
+          <strong>Profile Pic: </strong>
+          <img style="height: 300px; 
+          width: 320px; object-fit: cover; 
+          object-position: top;
+          border-radius: 5px;
+          "
+          [src]="accountService.currentUser()?.userPhotoUrl">
+     
+        </div>
+
+        <div>
           <strong>Location: </strong>
           <p>{{ member.city }}, {{ member.country }}</p>
         </div>
@@ -68,7 +79,7 @@
       </tab>
 
       <tab heading="Edit Photos">
-        <!-- Photo edit will go here -->
+        <app-photo-editor [member]="member"  (memberChage)="onMemberChange($event)"></app-photo-editor>
       </tab>
     </tabset>
   </div>

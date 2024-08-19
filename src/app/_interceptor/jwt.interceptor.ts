@@ -9,7 +9,7 @@ export class JwtInterceptor implements HttpInterceptor {
   constructor(private accountService:AccountService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> { 
-    if(this.accountService.currentUser$){
+    if(this.accountService.currentUser()){
     const userString= localStorage.getItem('user'); 
     const user = JSON.parse(userString!)
     if (user && user.token) {
