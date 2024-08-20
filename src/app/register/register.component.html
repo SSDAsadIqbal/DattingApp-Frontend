@@ -1,17 +1,48 @@
-<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off"> 
+<form   [formGroup]="registerForm" autocomplete="off"> 
   <h2 class="text-center text-primary">SignUp</h2>
   <hr>
-  <div class="mb-3">
-    <input type="text" name="username" class="form-control" [(ngModel)]="model.username" placeholder="username">
+  <div class="mb-3 form-floating">
+    <input 
+    type="text"  
+    class="form-control" 
+    formControlName="username" 
+    placeholder="username"
+    [class.is-invalid]="registerForm.get('username')?.errors && registerForm.get('username')?.touched"
+    > 
+    <label  >username</label>
+    <div class="invalid-feedback">Please enter username</div>
   </div>
 
-  <div class="mb-3">
-      <input type="password"  name="password" class="form-control" [(ngModel)]="model.password" placeholder="password">
+  <div class="mb-3 form-floating">
+    <input type="password"   
+    class="form-control"  
+    formControlName="password" 
+    placeholder="password"
+    [class.is-invalid]="registerForm.get('password')?.errors && registerForm.get('password')?.touched"
+    >
+    <label  >Password</label>
+      <div *ngIf="registerForm.get('password')?.hasError('required')" class="invalid-feedback">Please enter password</div>
+      <div *ngIf="registerForm.get('password')?.hasError('minlength')" class="invalid-feedback">password min Length is 4</div>
+      <div *ngIf="registerForm.get('password')?.hasError('maxlength')" class="invalid-feedback">password min max is 10</div>
   </div>
   
+  <div class="mb-3 form-floating">
+    <input type="password"   
+    class="form-control" 
+    formControlName="confirmPassword" 
+    placeholder="confirmPassword"
+    [class.is-invalid]="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched"
+    >
+    <label  >confirmPassword</label>
+    <div *ngIf="registerForm.get('confirmPassword')?.hasError('required')" class="invalid-feedback">Please enter password</div>
+      <div *ngIf="registerForm.get('confirmPassword')?.hasError('isMatching')" class="invalid-feedback">confirmPassword must match with password</div> 
+</div>
+
   <div class="text-center">
-    <button class="btn btn-primary me-2" type="submit">Register</button>
+    <button class="btn btn-primary me-2" [disabled]="!registerForm.valid" type="submit">Register</button>
     <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
   </div>
 
 </form>
+{{registerForm.value | json}}
+{{registerForm.valid | json}}

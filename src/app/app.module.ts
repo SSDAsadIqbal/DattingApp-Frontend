@@ -26,10 +26,8 @@ import { PhotoEditorComponent } from "./members/photo-editor/photo-editor.compon
 
 @NgModule({ declarations: [
         AppComponent,
-        NavComponent,
-        HomeComponent,
-        MemberListComponent,
-        RegisterComponent,
+        NavComponent, 
+        MemberListComponent, 
         ListsComponent,
         MessagesComponent,
         TestErrorComponent,
