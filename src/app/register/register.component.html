@@ -1,20 +1,38 @@
-<form [formGroup]="registerForm" autocomplete="off">
+<form [formGroup]="registerForm!" autocomplete="off">
   <h2 class="text-center text-primary">SignUp</h2>
   <hr>
 
-  <app-text-input [formControl]="$any(registerForm.controls['username'])" [label]="'Username'"></app-text-input>
+  <div class="mb-3">
+    <label style="margin-right: 10px;">I am a: </label>
+    <label class="form-check-label">
+      <input type="radio" class="form-check-input" value="male" formControlName="gender">Male
+    </label>
+    <label class="form-check-label">
+      <input type="radio" class="form-check-input" value="female" formControlName="gender">female
+    </label>
+  </div>
 
-  <app-text-input [formControl]="$any(registerForm.controls['password'])" [label]="'password'"
+  <app-text-input [formControl]="$any(registerForm!.controls['username'])" [label]="'Username'"></app-text-input>
+
+  <app-text-input [formControl]="$any(registerForm!.controls['knownAs'])" [label]="'knownAs'"></app-text-input>
+
+  <app-date-picker [formControl]="$any(registerForm!.controls['dateOfBirth'])" [label]="'dateOfBirth'" [maxDate]="maxDate"></app-date-picker>
+
+  <app-text-input [formControl]="$any(registerForm!.controls['city'])" [label]="'city'"></app-text-input>
+
+  <app-text-input [formControl]="$any(registerForm!.controls['country'])" [label]="'country'"></app-text-input>
+
+  <app-text-input [formControl]="$any(registerForm!.controls['password'])" [label]="'password'"
     [type]="'password'"></app-text-input>
     
-  <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])" [label]="'confirmPassword'"
+  <app-text-input [formControl]="$any(registerForm!.controls['confirmPassword'])" [label]="'confirmPassword'"
     [type]="'password'"></app-text-input>
 
   <div class="text-center">
-    <button class="btn btn-primary me-2" [disabled]="!registerForm.valid" type="submit">Register</button>
+    <button class="btn btn-primary me-2" [disabled]="!registerForm!.valid" type="submit">Register</button>
     <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
   </div>
 
 </form>
-{{registerForm.value | json}}
-{{registerForm.valid | json}}
+{{registerForm!.value | json}}
+{{registerForm!.valid | json}}
