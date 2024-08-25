@@ -43,7 +43,7 @@ export class PhotoEditorComponent implements OnInit {
         const updatedMember = {...this.member()}
         let photox = updatedMember.photos?.filter(photo => photo.isMain == true) 
         photox[0].data = photo.data;
-        this.memberChage.emit(updatedMember)
+        this.memberChage.emit(updatedMember) 
       } 
     })
   }
@@ -81,7 +81,16 @@ export class PhotoEditorComponent implements OnInit {
       const updateMember = {...this.member()};
       updateMember.photos.push(photo);
       this.memberChage.emit(updateMember);
+      if(photo.isMain){
+        const user = this.accountService.currentUser();
+        if(user){
+          user.userPhotoUrl = photo.data;
+          this.accountService.setCurrentUser(user);
+      }
+      let photox = updateMember.photos?.filter(photo => photo.isMain == true) 
+        photox[0].data = photo.data;
+        this.memberChage.emit(updateMember) 
     }
-  }
+   }
+  } 
 }
-
