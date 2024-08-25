@@ -1,16 +1,25 @@
 
   <div class="row">
     <div class="col-4">
-      <div class="card">
-        <div class="" *ngIf="mainPhoto()">
-          <img [src]="mainPhoto()" class="card-img img-thumbnail">
-        </div>
-     
+      <div class="card">  
+ 
 
         <div class="card-body">
+
+          <div class="">
+              <strong>Profile Pic : </strong>
+              @if (mainPhoto()) {
+                <img [src]="mainPhoto()" class="card-img img-thumbnail mt-0">
+              }@else {
+                <img [src]="'../../../assets/user.png'" class="card-img img-thumbnail">
+              }
+          </div>
+
           <div class="">
             <strong>Location: </strong>
-            <p>{{member!.city}}, {{member?.country}}</p>
+            @if (member!.city) {
+              <p>{{member!.city}} , {{member?.country}}</p>
+            }
           </div>
 
           <div class="">

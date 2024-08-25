@@ -12,11 +12,11 @@ export class MemberListComponent implements OnInit {
   constructor(public memberService : MembersService) { }
 
   ngOnInit() {
-    if(this.memberService.members().length === 0 ) this.loadMembers(); 
+    if(!this.memberService.paginatedResult()) this.loadMembers(); 
   }
  
   loadMembers(){
-    this.memberService.getMembers(); 
+    this.memberService.getMembers(1,5); 
   }
 
 }

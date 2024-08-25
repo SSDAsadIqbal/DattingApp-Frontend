@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Member } from '../_models/member';
 import { environment } from 'src/environments/environment.development';
 import { of, tap } from 'rxjs';
+import { PaginatedResult } from '../_models/pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,30 @@ export class MembersService {
 
   constructor(private http:HttpClient) { }
   baseUrl = environment.apiUrl;
-  members = signal<Member[]>([]);
+  // members = signal<Member[]>([]);
+  paginatedResult = signal<PaginatedResult<Member[]> | null>(null) ;
 
-  getMembers(){
-    return this.http.get<Member[]>(this.baseUrl + 'Users/GetUsers' ).subscribe({
-      next: memebrs => this.members.set(memebrs)
+  getMembers(pageNumber?:number,pageSize?:number){
+    let params = new HttpParams();
+
+    if(pageNumber && pageSize){
+      params = params.append('pageNumber',pageNumber)
+      params = params.append('pageSize',pageSize)
+    }
+
+    return this.http.get<Member[]>(this.baseUrl + 'Users/GetUsers',{observe:'response',params} ).subscribe({
+      next: response =>{
+        this.paginatedResult.set({
+          items:response.body as Member[],
+          pagination:JSON.parse(response.headers.get('Pagination')!)
+        })
+      } 
     })
   }
 
   getMember(userName:string){
-    const member = this.members().find(member => member.userName === userName);
-    if(member !== undefined ) return of(member);
+    // const member = this.members().find(member => member.userName === userName);
+    // if(member !== undefined ) return of(member);
 
     return this.http.get<Member>(this.baseUrl + 'Users/GetUser/' + userName )
   }
@@ -40,9 +54,9 @@ export class MembersService {
 
   updateMember(member : Member){
     return this.http.put(this.baseUrl + 'Users/UpdateUser' , member).pipe(
-      tap(()=>{
-        this.members.update(members => members.map(m=>m.userName === member.userName ? member : m))
-      })
+      // tap(()=>{
+      //   this.members.update(members => members.map(m=>m.userName === member.userName ? member : m))
+      // })
     )
   }
 

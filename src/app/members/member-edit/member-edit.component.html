@@ -16,12 +16,21 @@
       <div class="card-body">
         <div>
           <strong>Profile Pic: </strong>
-          <img style="height: 300px; 
+          @if (accountService.currentUser()!.userPhotoUrl) {
+            <img style="height: 300px; 
           width: 320px; object-fit: cover; 
           object-position: top;
           border-radius: 5px;
           "
           [src]="accountService.currentUser()?.userPhotoUrl">
+          }@else {
+            <img style="height: 300px; 
+            width: 320px; object-fit: cover; 
+            object-position: top;
+            border-radius: 5px;
+            "
+            [src]="'../../../assets/user.png'">
+          }
      
         </div>
 

@@ -1,4 +1,4 @@
 
   <div>
-    <app-member-card [members]="memberService.members()"></app-member-card>
+    <app-member-card [members]="memberService.paginatedResult()?.items"></app-member-card>
   </div>
