@@ -2,6 +2,8 @@ export interface User {
         username: string;
         token: string;
         userPhotoUrl: string;
+        knownAs: string;
+        gender: string;
 }
 
 export interface Root {

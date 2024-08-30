@@ -14,27 +14,23 @@ import { SharedModule } from './_modules/shared.module';
 import { TestErrorComponent } from './error/test-error/test-error.component';
 import { ErrorInterceptor } from './_interceptor/error.interceptor';
 import { NotFoundComponent } from './error/not-found/not-found.component';
-import { ServerErrorComponent } from './error/server-error/server-error.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
-import { MemberCardComponent } from './members/member-card/member-card.component';
+import { ServerErrorComponent } from './error/server-error/server-error.component';  
 import { JwtInterceptor } from './_interceptor/jwt.interceptor';
 import { TabsModule } from 'ngx-bootstrap/tabs'; 
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { NgxSpinnerComponent, NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './_interceptor/loading.interceptor';
 import { PhotoEditorComponent } from "./members/photo-editor/photo-editor.component";
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({ declarations: [
         AppComponent,
-        NavComponent, 
-        MemberListComponent, 
+        NavComponent,  
         ListsComponent,
         MessagesComponent,
         TestErrorComponent,
         NotFoundComponent,
-        ServerErrorComponent,
-        MemberCardComponent,
-        MemberEditComponent
+        ServerErrorComponent,  
     ],
     bootstrap: [AppComponent], 
     imports: [
@@ -45,8 +41,8 @@ import { PhotoEditorComponent } from "./members/photo-editor/photo-editor.compon
     SharedModule,
     NgxSpinnerModule,
     NgxSpinnerComponent,
-    TabsModule.forRoot(),
-    PhotoEditorComponent
+    TabsModule.forRoot(), 
+    TimeagoModule.forRoot()
 ],
     providers: [
         // Provide HTTP interceptors using the new Angular 18 API

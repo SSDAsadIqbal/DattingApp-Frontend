@@ -1,12 +1,15 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { Member } from 'src/app/_models/member';
 import { Photo } from 'src/app/_models/photo';
 
 @Component({
   selector: 'app-member-card',
   templateUrl: './member-card.component.html',  
-  styleUrls: ['./member-card.component.css']
+  styleUrls: ['./member-card.component.css'],
+  standalone: true,
+  imports:[RouterModule,NgIf,RouterLink,NgFor]
 })
 export class MemberCardComponent {
   @Input() members:  Member[] | undefined;

@@ -1,8 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TimeagoModule, TimeagoPipe } from 'ngx-timeago';
 import { Member } from 'src/app/_models/member';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
@@ -11,7 +12,7 @@ import { MembersService } from 'src/app/_services/members.service';
 @Component({
   selector: 'app-member-details',
   templateUrl: './member-details.component.html', 
-  imports:[TabsModule,GalleryModule,CommonModule],
+  imports:[TabsModule,GalleryModule,CommonModule,TimeagoModule,DatePipe],
   standalone: true,
   styleUrls: ['./member-details.component.css']
 })

@@ -6,13 +6,14 @@ import { Photo } from 'src/app/_models/photo';
 import { AccountService } from 'src/app/_services/account.service'; 
 import { MembersService } from 'src/app/_services/members.service';
 import { environment } from 'src/environments/environment';
+import { MemberEditComponent } from '../member-edit/member-edit.component';
 
 @Component({
   selector: 'app-photo-editor',
   standalone: true,
-  imports: [NgIf,NgFor,NgStyle,NgClass,FileUploadModule,DecimalPipe],
+  imports: [NgIf,NgFor,NgStyle,NgClass,FileUploadModule,DecimalPipe,MemberEditComponent],
   templateUrl: './photo-editor.component.html',
-  styleUrl: './photo-editor.component.css'
+  styleUrl: './photo-editor.component.css',
 })
 export class PhotoEditorComponent implements OnInit {
   private accountService = inject(AccountService);
